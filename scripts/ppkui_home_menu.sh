@@ -6,5 +6,8 @@ if [ -n "$running_menu" ]; then
   exit
 fi
 
-# TODO: replace xterm
-exec j4-dmenu-desktop --dmenu="ppkui_menu --config /etc/ppkui/bar.toml" --term="xterm"
+# hide keyboard first
+busctl call --user sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 SetVisible b false
+
+# start menu
+setsid j4-dmenu-desktop --dmenu="ppkui_menu --config /etc/ppkui/bar.toml" --term="termite"
