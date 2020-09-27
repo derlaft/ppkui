@@ -1,6 +1,6 @@
 #!/bin/sh
 
-current=$(busctl call --user sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 GetVisible)
+current=$(busctl get-property --user sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 Visible | cut -d' ' -f2)
 if [ "$current" = "true" ]; then
   new=false
 else
