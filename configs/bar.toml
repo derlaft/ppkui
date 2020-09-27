@@ -16,16 +16,15 @@ command = "swaymsg focus prev"
 
 [[bar.buttons]]
 text = "C"
-command = "j4-dmenu-desktop --dmenu='ppkui_menu --config '/etc/ppkui/bar.toml --term='xterm'"
+command = "ppkui_home_menu.sh"
 
 [[bar.buttons]]
 text = "D"
 command = "swaymsg focus next"
 
 [[bar.buttons]]
-# TODO
 text = "E"
-command = "urxvt -e sh -c 'env; read'"
+command = "ppkui_toggle_keyboard.sh"
 
 [launcher]
 line_height = 32
