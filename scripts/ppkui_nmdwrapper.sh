@@ -1,6 +1,11 @@
 #!/bin/sh
 
-# TODO: use bemenu for password entry
-# TODO: also show keyboard for password entry
+if echo "$@" | grep -q -- '-p Passphrase'; then
+  # show keyboard first
+  busctl call --user sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 SetVisible b true
 
-ppkui_menu --config /etc/ppkui/bar.toml
+  # use bemenu
+  bemenu "$@"
+fi
+
+ppkui_menu --config /etc/ppkui/bar.toml "$@"
