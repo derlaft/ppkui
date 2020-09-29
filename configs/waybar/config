@@ -1,0 +1,34 @@
+{
+    "layer": "bottom",
+	"height": 24,
+    "modules-left": ["network"],
+    "modules-center": ["clock"],
+    "modules-right": ["battery"],
+    "clock": {
+      "format": "{:%H:%M}",
+        "tooltip-format": "{:%Y-%m-%d | %H:%M}",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "",
+        "format-alt": "{essid}: {ipaddr}"
+    }
+}
