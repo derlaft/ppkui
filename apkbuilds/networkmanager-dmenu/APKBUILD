@@ -1,0 +1,25 @@
+# Contributor:
+# Maintainer:
+pkgname=networkmanager-dmenu
+pkgver=1.6.0
+pkgrel=1
+pkgdesc="Control NetworkManager via dmenu"
+url="https://github.com/firecat53/networkmanager-dmenu"
+arch="all"
+license="MIT"
+depends="py3-gobject3"
+makedepends=""
+install=""
+source="https://github.com/firecat53/networkmanager-dmenu/archive/$pkgver/networkmanager-dmenu-$pkgver.tar.gz 10-global-conf.patch"
+builddir="$srcdir/networkmanager-dmenu-$pkgver"
+options="!check"
+
+package() {
+  install -Dm755 "$builddir/networkmanager_dmenu" \
+    "$pkgdir/usr/bin/networkmanager_dmenu"
+  install -Dm755 "$builddir/networkmanager_dmenu.desktop" \
+    "$pkgdir/usr/share/applications/networkmanager_dmenu.desktop"
+}
+
+sha512sums="1b6eb5c3799951fa3d09e39e7fbe3ea1e9bc4ea103ff59513d7fc8856bdb1220d590513e141eb82775f51edede04dfa0c0ac396acc6fc500d3bafa0592e48e2e  networkmanager-dmenu-1.6.0.tar.gz
+5013d99780469ef348050d79ceb11d79871c45e20d1a6c00c78f8282c70372c73183d48e427f15381e1594673675fa345bec754279fbf758169b83bacd9555e7  10-global-conf.patch"

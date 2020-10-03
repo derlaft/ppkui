@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=PPKUI
+Name[en]=PPKUI
+Comment=This session logs you into Sway with PPKUI config
+Comment[en]=This session logs in you into Sway with PPKUI config
+Exec=dbus-run-session /usr/bin/sway --config /etc/ppkui/sway.conf
+TryExec = /usr/bin/sway
+Icon=
+Type=Application
+X-DesktopNames=Sway
+Keywords=launch;Sway;desktop;session;

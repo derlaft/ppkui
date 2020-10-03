@@ -1,0 +1,31 @@
+# Contributor:
+# Maintainer:
+pkgname=ppkui-bar
+pkgver=0.0.3
+pkgrel=2
+pkgdesc="Native wayland touch bar"
+url="https://github.com/derlaft/ppkui_bar"
+arch="all"
+license="MIT"
+depends=""
+makedepends="wayland-protocols cargo musl-dev"
+install=""
+source="https://github.com/derlaft/ppkui_bar/archive/v$pkgver/ppkui_bar-$pkgver.tar.gz"
+builddir="$srcdir/ppkui_bar-$pkgver"
+
+build() {
+  cargo build --release --locked
+}
+
+check() {
+	cargo test --release
+}
+
+package() {
+	cargo install --path . --root="$pkgdir/usr"
+	rm "$pkgdir"/usr/.crates.toml
+	install -Dm644 "$builddir"/assets/panel.ttf \
+		"$pkgdir"/usr/share/ppkui/panel.ttf
+}
+
+sha512sums="766331eb25a85a464e54d114d1c6d8fc6105a671dcf1b3e4333a691fd00af4a0fbc2fc5b5cfe09d85eaa0d0f432bff3de19e49bdf99af9a146eaddb2bb4fb568  ppkui_bar-0.0.3.tar.gz"

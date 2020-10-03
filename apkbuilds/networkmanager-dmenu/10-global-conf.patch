@@ -1,0 +1,16 @@
+diff --git a/networkmanager_dmenu b/networkmanager_dmenu
+index 33ba44b..2505608 100755
+--- a/networkmanager_dmenu
++++ b/networkmanager_dmenu
+@@ -37,7 +37,10 @@ LOOP = GLib.MainLoop()
+ CONNS = CLIENT.get_connections()
+ 
+ CONF = configparser.ConfigParser()
+-CONF.read(expanduser("~/.config/networkmanager-dmenu/config.ini"))
++CONF.read([
++    "/etc/networkmanager-dmenu.ini",
++    expanduser("~/.config/networkmanager-dmenu/config.ini"),
++])
+ 
+ def dmenu_cmd(num_lines, prompt="Networks", active_lines=None):  # pylint: disable=too-many-branches
+     """Parse config.ini if it exists and add options to the dmenu command

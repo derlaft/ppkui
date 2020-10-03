@@ -1,0 +1,57 @@
+# Maintainer: derlafff <pmos@devass.club>
+pkgname=postmarketos-ui-ppkui
+pkgver=1
+pkgrel=27
+pkgdesc="(Wayland) Sway-based touch-friendly desktop environment (DOES NOT RUN WITHOUT HW ACCELERATION!)"
+url="https://github.com/derlaft/ppkui"
+arch="noarch !armhf !x86" # armhf,x86: aports#11807
+license="GPL-3.0-or-later"
+depends="elogind
+  polkit-elogind
+	lightdm
+	lightdm-openrc
+	sway
+  ppkui-bar
+  font-noto
+  j4-dmenu-desktop
+	"
+_pmb_recommends="postmarketos-artwork-wallpapers
+	termite
+	swaylock
+	swayidle
+	xorg-server-xwayland
+	mobile-config-firefox
+	firefox-esr
+  postmarketos-hidden-desktop-entries
+  squeekboard
+  bemenu
+  waybar
+  networkmanager-dmenu
+	"
+install="$pkgname.post-install $pkgname.post-upgrade"
+source="https://github.com/derlaft/ppkui/archive/master.zip 67-lightdm-autologin.conf postmarketos_background ppkui.desktop force-wayland.sh"
+builddir="$srcdir/ppkui-master"
+options="!check" # no testsuite
+
+package() {
+	install -Dm644 "$srcdir"/67-lightdm-autologin.conf \
+		"$pkgdir"/usr/share/lightdm/lightdm.conf.d/67-autologin.conf
+	install -Dm644 "$srcdir"/postmarketos_background \
+		"$pkgdir"/etc/sway/config.d/postmarketos_background
+  install -Dm644 "$srcdir"/ppkui.desktop \
+		"$pkgdir"/usr/share/wayland-sessions/ppkui.desktop
+  install -Dm755 "$srcdir"/force-wayland.sh \
+		"$pkgdir"/etc/profile.d/force-wayland.sh
+
+
+  # install package files
+  install -Dm644 "$builddir"/etc/* -t "${pkgdir}"/etc/
+  install -Dm644 "$builddir"/configs/* -t "${pkgdir}"/etc/ppkui/
+  install -Dm644 "$builddir"/squeekboard/* -t "${pkgdir}"/etc/ppkui/squeekboard/
+  install -Dm755 "$builddir"/scripts/* -t "${pkgdir}"/usr/bin/
+}
+sha512sums="58f1bd83d9012b8e4d7ec551ef35e6ed7250aef8e07ac9441ae1a005125cdbe4f0f8c43801641c6667d7a60d5abda7473f33a85c7a7ff6588eb194ea4d35acda  master.zip
+18b42659e0f80a6ace6d202c92ac9f93c6bd3f4d3a394eda04c7edf4b1749374aaa3b0a5cb7d34306e0c47f2d275acb367cce104c3bd206b96592225d374ee3c  67-lightdm-autologin.conf
+1a70c9a0709d4474317b75ad4929673509a1198e4b95378f8dd02f795b2585ad296b409f06c66d4375c5b6732643f86d04a5220a32de794f464b9375af8487ec  postmarketos_background
+13518edaadb9963ca0cbbc460c68f27a128b68cc4ada8c8be308e03187a6d1d07930a6e861cbe3a8904c44de6200cb7d27e6ee570c9e7b10d3a2f089884c9937  ppkui.desktop
+ae4142bb096d73eb5552f785c722b0612c16537a5e83d26fe2852dc4335f8f1179cbb02991ce9ae67d6b517d37d76276be599848d64c2e1cdef055d44df9b90b  force-wayland.sh"
